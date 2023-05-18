@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import { createServer } from 'http';
 
@@ -6,6 +7,8 @@ import { environment } from './util';
 
 const rest = () => {
   const app = express();
+
+  app.use(cors());
 
   app.set('trust proxy', 1);
   app.set('view cache', false);

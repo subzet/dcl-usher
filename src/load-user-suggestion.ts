@@ -3,7 +3,7 @@
 import csv from 'csv-parser';
 import fs from 'fs';
 
-import { UserModel } from './model';
+import { UserSuggestionModel } from './model/user-suggestion';
 import { setupDatabase } from './util';
 
 async function readCSVFile(filePath: string): Promise<object[]> {
@@ -22,19 +22,21 @@ async function main() {
   await setupDatabase();
 
   //This should be done in S3. This is just a quick way to load the data.
-  const result = await readCSVFile('<PATH TO user_movements.csv FILE>');
+  const result = await readCSVFile('<path to user suggestion.csv>');
 
   await Promise.all(
     result.map(async (userRow) => {
       const walletId = Object.values(userRow)[0];
 
-      const user = await UserModel.findOne({ walletId });
+      const tiles: string[] = (
+        Object.values(userRow)[1].split(' ') as string[]
+      ).map((tile) => tile.replace('|', ','));
 
-      if (user) {
-        return;
-      }
-
-      return UserModel.create({ walletId });
+      await UserSuggestionModel.findOneAndUpdate(
+        { walletId },
+        { tiles },
+        { upsert: true }
+      );
     })
   );
 }

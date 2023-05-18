@@ -19,3 +19,4 @@ service*account.json
 *.ovpn
 .eslintcache
 .ultra.cache.json
+try.ts

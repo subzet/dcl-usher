@@ -7,15 +7,31 @@ import { userService } from '../service/user';
 
 const router = Router();
 
-const getCategorySchema = {
+const getUserSchema = {
   params: s.object({
     walletId: s.string(),
   }),
 };
 
+router.get('/:walletId', validate(getUserSchema), async (request, response) => {
+  const { walletId } = request.params;
+
+  if (!web3.utils.isAddress(walletId)) {
+    return response.status(400).send({ message: 'Invalid wallet address' });
+  }
+
+  const user = await userService.get(walletId.toLowerCase());
+
+  if (!user) {
+    return response.status(404).send({ message: 'User not found' });
+  }
+
+  return response.status(200).send(user);
+});
+
 router.get(
-  '/:walletId',
-  validate(getCategorySchema),
+  '/:walletId/recommendation',
+  validate(getUserSchema),
   async (request, response) => {
     const { walletId } = request.params;
 
@@ -23,13 +39,9 @@ router.get(
       return response.status(400).send({ message: 'Invalid wallet address' });
     }
 
-    const user = await userService.get(walletId.toLowerCase());
+    const tiles = await userService.recommend(walletId.toLowerCase());
 
-    if (!user) {
-      return response.status(404).send({ message: 'User not found' });
-    }
-
-    return response.status(200).send(user);
+    return response.status(200).send(tiles);
   }
 );
 

@@ -51,6 +51,7 @@ const getCategories = async (place: Place) => {
 const main = async () => {
   await setupDatabase();
 
+  //This should be done in S3. This is just a quick way to load the data.
   const places: Place[] = JSON.parse(
     fs.readFileSync('<path to places.json file>', 'utf8')
   );
