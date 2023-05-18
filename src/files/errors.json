@@ -1,16 +1,16 @@
 [
-    {
-        "PLACE_ID": "d2cbb156-a1ab-47f1-834d-a37269dd9870",
-        "DESCRIPTION": "Capitaverse",
-        "TAGS": "",
-        "USER_VISITS": 0,
-        "BASE_POSITION": "-123|-126"
-    },
-    {
-        "PLACE_ID": "e69cecea-c8b4-4d8b-b4a2-9f826b60a715",
-        "DESCRIPTION": "Collect mining ores and magic stones through mining as well as farm magic plant nearby Elswyth Magic School, create wearables through alchemy and crafting!",
-        "TAGS": "atlas:0x33c8a9d99885b63af,atlas:0x115af9c5dd8a417be,atlas:0x3d17c3f656d1efbe7,atlas:0x97956bdcf24962efa",
-        "USER_VISITS": 565,
-        "BASE_POSITION": "-29|80"
-    }
+  {
+    "PLACE_ID": "d2cbb156-a1ab-47f1-834d-a37269dd9870",
+    "DESCRIPTION": "Capitaverse",
+    "TAGS": "",
+    "USER_VISITS": 0,
+    "BASE_POSITION": "-123|-126"
+  },
+  {
+    "PLACE_ID": "e69cecea-c8b4-4d8b-b4a2-9f826b60a715",
+    "DESCRIPTION": "Collect mining ores and magic stones through mining as well as farm magic plant nearby Elswyth Magic School, create wearables through alchemy and crafting!",
+    "TAGS": "atlas:0x33c8a9d99885b63af,atlas:0x115af9c5dd8a417be,atlas:0x3d17c3f656d1efbe7,atlas:0x97956bdcf24962efa",
+    "USER_VISITS": 565,
+    "BASE_POSITION": "-29|80"
+  }
 ]

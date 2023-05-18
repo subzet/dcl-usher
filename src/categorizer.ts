@@ -16,11 +16,6 @@ interface Place {
   BASE_POSITION: string;
 }
 
-interface Category {
-  name: string;
-  places: string[];
-}
-
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_API_KEY,
 });
@@ -57,10 +52,7 @@ const main = async () => {
   await setupDatabase();
 
   const places: Place[] = JSON.parse(
-    fs.readFileSync(
-      '/Users/manuel/Documents/projects/decentraland/dcl-usher/src/files/places.json',
-      'utf8'
-    )
+    fs.readFileSync('<path to places.json file>', 'utf8')
   );
 
   await initOpenAi();

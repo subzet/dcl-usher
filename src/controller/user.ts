@@ -1,34 +1,36 @@
 import Router from 'express-promise-router';
 import * as s from 'superstruct';
+import web3 from 'web3';
 
 import { validate } from '../middleware';
 import { userService } from '../service/user';
 
 const router = Router();
 
-const getUserSchema = {
+const getCategorySchema = {
   params: s.object({
-    id: s.string(),
+    walletId: s.string(),
   }),
 };
 
-router.get('/:id', validate(getUserSchema), (request, response) => {
-  return response.status(200).send({ ok: true });
-});
+router.get(
+  '/:walletId',
+  validate(getCategorySchema),
+  async (request, response) => {
+    const { walletId } = request.params;
 
-const createUserSchema = {
-  body: s.object({
-    name: s.string(),
-    email: s.string(),
-  }),
-};
+    if (!web3.utils.isAddress(walletId)) {
+      return response.status(400).send({ message: 'Invalid wallet address' });
+    }
 
-router.post('/', validate(createUserSchema), async (request, response) => {
-  const { name, email } = request.body;
+    const user = await userService.get(walletId.toLowerCase());
 
-  const user = await userService.create({ name, email, active: false });
+    if (!user) {
+      return response.status(404).send({ message: 'User not found' });
+    }
 
-  return response.status(200).send(user);
-});
+    return response.status(200).send(user);
+  }
+);
 
 export default router;

@@ -10,12 +10,14 @@ class CategoryService {
     }
 
     return categories.map((category) => {
-      return category.toJSON();
+      return { ...category.toJSON(), name: category.name.replace('/', '-') };
     });
   };
 
   public get = async (name: string): Promise<Record<string, any> | void> => {
-    const category = await CategoriesModel.findOne({ name });
+    const category = await CategoriesModel.findOne({
+      name: name.replace('-', '/'),
+    });
 
     if (!category) {
       return {};
@@ -23,13 +25,18 @@ class CategoryService {
 
     const placesData = await Promise.all(
       category.places.map(async (placeId) => {
-        return await placesService.getPlace(placeId);
+        try {
+          return await placesService.getPlace(placeId);
+        } catch (error) {
+          console.log(error);
+          return;
+        }
       })
     );
 
     return {
-      name: category.name,
-      places: placesData,
+      name: category.name.replace('/', '-'),
+      places: placesData.filter((place) => !!place),
     };
   };
 }

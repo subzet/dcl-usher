@@ -4,13 +4,7 @@ import { MongoBase } from './base';
 
 export class User extends MongoBase {
   @prop()
-  name!: string;
-
-  @prop()
-  email!: string;
-
-  @prop()
-  active!: boolean;
+  walletId!: string;
 }
 
 export const UserModel = getModelForClass(User);
