@@ -8,19 +8,19 @@ const router = Router();
 
 const getCategorySchema = {
   params: s.object({
-    name: s.string(),
+    id: s.string(),
   }),
 };
 
-router.get('/:name', validate(getCategorySchema), async (request, response) => {
-  const { name } = request.params;
+router.get('/:id', validate(getCategorySchema), async (request, response) => {
+  const { id } = request.params;
 
-  const category = await categoryService.get(name);
+  const category = await categoryService.getById(id);
 
   return response.status(200).send(category);
 });
 
-router.get('/', async (request, response) => {
+router.get('/', async (_request, response) => {
   const categories = await categoryService.getAll();
 
   return response.status(200).send(categories);
