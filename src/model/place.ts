@@ -1,0 +1,34 @@
+export interface PlaceData {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  owner: null;
+  tags: any[];
+  positions: string[];
+  base_position: string;
+  contact_name: string;
+  contact_email: null;
+  content_rating: null;
+  disabled: boolean;
+  disabled_at: null;
+  created_at: Date;
+  updated_at: Date;
+  favorites: number;
+  likes: number;
+  dislikes: number;
+  categories: any[];
+  like_rate: number;
+  highlighted: boolean;
+  highlighted_image: string;
+  featured: boolean;
+  featured_image: null;
+  world: boolean;
+  world_name: null;
+  deployed_at: Date;
+  user_favorite: boolean;
+  user_like: boolean;
+  user_dislike: boolean;
+  user_count: number;
+  user_visits: number;
+}
