@@ -18,11 +18,13 @@ class UserService {
       return [];
     }
 
-    return Promise.all(
+    const scenes = await Promise.all(
       userSuggestion.tiles.map((tile) => {
         return sceneService.getFromCatalyst(tile);
       })
     );
+
+    return scenes.filter((scene) => !!scene);
   };
 }
 

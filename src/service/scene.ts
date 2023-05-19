@@ -20,12 +20,16 @@ class SceneService {
   public getFromCatalyst = async (tile: string): Promise<any> => {
     this.checkTile(tile);
 
-    const catalystData = await axios.post(
-      'https://peer.decentraland.org/content/entities/active',
-      { pointers: [tile] }
-    );
+    try {
+      const catalystData = await axios.post(
+        'https://peer.decentraland.org/content/entities/active',
+        { pointers: [tile] }
+      );
 
-    return catalystData.data[0].metadata;
+      return catalystData.data[0].metadata;
+    } catch {
+      return;
+    }
   };
 }
 
